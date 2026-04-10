@@ -9,13 +9,14 @@ AI-powered personal finance assistant that parses bank statement PDFs, categoriz
 ## Repository Structure
 
 - **server/** — NestJS backend (pnpm)
-- **webapp/** — TanStack Start + React 19 frontend (npm)
+- **webapp/** — TanStack Start + React 19 frontend (pnpm)
 - **bdr/** — Business docs (problem statement, architecture, tech stack)
 - **infra/** — Infrastructure config
 
 ## Commands
 
 ### Server (`cd server`)
+
 ```bash
 pnpm start:dev              # Dev server with watch
 pnpm build                  # Production build
@@ -28,15 +29,17 @@ pnpm format                 # Prettier formatting
 ```
 
 ### Webapp (`cd webapp`)
+
 ```bash
-npm run dev                 # Dev server on port 3000
-npm run build               # Production build (client + SSR)
-npm run test                # Run tests (vitest)
+pnpm dev                 # Dev server on port 3000
+pnpm build               # Production build (client + SSR)
+pnpm test                # Run tests (vitest)
 ```
 
 ## Architecture
 
 ### Backend (NestJS)
+
 - **Swagger** auto-generates API docs via `@nestjs/swagger` plugin (introspects comments and class-validator decorators — no manual `@ApiProperty` needed)
 - **Testing:** Vitest with `@suites/unit` for auto-mocking NestJS DI containers. Uses `@suites/doubles.vitest` for test doubles
 - **Build:** SWC compiler (`unplugin-swc`) instead of tsc for speed
@@ -44,6 +47,7 @@ npm run test                # Run tests (vitest)
 - **Data layer:** Supabase (Postgres for transactions, object storage for PDFs, vector DB for embeddings)
 
 ### Frontend (TanStack Start)
+
 - **SSR framework** with file-based routing — add routes in `webapp/src/routes/`, route tree auto-generates
 - **shadcn/ui** components in `webapp/src/components/ui/` — add via `npx shadcn@latest add <component>`
 - **Import aliases:** `#/*` and `@/*` both resolve to `./src/*`
